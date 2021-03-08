@@ -32,19 +32,17 @@ describe 'request weather forecast information', :vcr do
     expect(current_weather).to be_a(Hash)
 
     expect(current_weather).to have_key(:datetime)
-    #verify date formats for these
     expect(current_weather).to have_key(:sunrise)
     expect(current_weather).to have_key(:sunset)
 
     expect(current_weather).to have_key(:temperature)
     expect(current_weather[:temperature]).to be_a(Float).or(be_an(Integer))
-    #need something to verify farenheight
 
     expect(current_weather).to have_key(:feels_like)
-    #verify Farenheight
+    expect(current_weather[:feels_like]).to be_a(Float).or(be_an(Integer))
 
     expect(current_weather).to have_key(:humidity)
-    #expect(current_weather_a(Number)
+    expect(current_weather[:humidity]).to be_a(Float).or(be_an(Integer))
 
     expect(current_weather).to have_key(:uvi)
     expect(current_weather[:uvi]).to be_a(Float).or(be_an(Integer))
@@ -57,7 +55,12 @@ describe 'request weather forecast information', :vcr do
 
     expect(current_weather).to have_key(:icon)
     expect(current_weather[:icon]).to be_a(String)
-    #test not_have
+
+    expect(current_weather).not_to have_key(:pressure)
+    expect(current_weather).not_to have_key(:dew_point)
+    expect(current_weather).not_to have_key(:clouds)
+    expect(current_weather).not_to have_key(:wind_speed)
+    expect(current_weather).not_to have_key(:wind_deg)
   end
 
   it 'has daily_weather' do
@@ -72,25 +75,31 @@ describe 'request weather forecast information', :vcr do
 
     expect(daily_weather.first).to be_a(Hash)
     expect(daily_weather.first).to have_key(:date)
-    #verify date format
     expect(daily_weather.first).to have_key(:sunrise)
-    #verify datetime format
     expect(daily_weather.first).to have_key(:sunset)
-    #verify datetime format
 
     expect(daily_weather.first).to have_key(:max_temp)
     expect(daily_weather.first[:max_temp]).to be_a(Float).or(be_an(Integer))
-    #also verify Farenheight
+
     expect(daily_weather.first).to have_key(:min_temp)
     expect(daily_weather.first[:min_temp]).to be_a(Float).or(be_an(Integer))
-    #also verify Farenheight
 
     expect(daily_weather.first).to have_key(:conditions)
     expect(daily_weather.first[:conditions]).to be_a(String)
 
     expect(daily_weather.first).to have_key(:icon)
     expect(daily_weather.first[:icon]).to be_a(String)
-    #not have
+
+    expect(daily_weather.first).not_to have_key(:feels_like)
+    expect(daily_weather.first).not_to have_key(:wind_pressure)
+    expect(daily_weather.first).not_to have_key(:humidity)
+    expect(daily_weather.first).not_to have_key(:dew_point)
+    expect(daily_weather.first).not_to have_key(:wind_speed)
+    expect(daily_weather.first).not_to have_key(:wind_deg)
+    expect(daily_weather.first).not_to have_key(:weather)
+    expect(daily_weather.first).not_to have_key(:pop)
+    expect(daily_weather.first).not_to have_key(:clouds)
+    expect(daily_weather.first).not_to have_key(:uvi)
   end
 
   it 'has hourly_weather' do
@@ -105,17 +114,25 @@ describe 'request weather forecast information', :vcr do
 
     expect(hourly_weather.first).to be_a(Hash)
     expect(hourly_weather.first).to have_key(:time)
-    #verify time format
 
     expect(hourly_weather.first).to have_key(:temperature)
     expect(hourly_weather.first[:temperature]).to be_a(Float).or(be_an(Integer))
-    #verify farenheight
 
     expect(hourly_weather.first).to have_key(:conditions)
     expect(hourly_weather.first[:conditions]).to be_a(String)
 
     expect(hourly_weather.first).to have_key(:icon)
     expect(hourly_weather.first[:icon]).to be_a(String)
-    #not_have
+
+    expect(hourly_weather.first).not_to have_key(:feels_like)
+    expect(hourly_weather.first).not_to have_key(:pressure)
+    expect(hourly_weather.first).not_to have_key(:humidity)
+    expect(hourly_weather.first).not_to have_key(:dew_point)
+    expect(hourly_weather.first).not_to have_key(:uvi)
+    expect(hourly_weather.first).not_to have_key(:clouds)
+    expect(hourly_weather.first).not_to have_key(:visibility)
+    expect(hourly_weather.first).not_to have_key(:wind_speed)
+    expect(hourly_weather.first).not_to have_key(:wind_deg)
+    expect(hourly_weather.first).not_to have_key(:weather)
   end
 end
