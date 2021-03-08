@@ -37,7 +37,7 @@ describe Munchy do
     expect(munchy).to be_a(Munchy)
     expect(munchy.restaurant).to be_a(Restaurant)
     expect(munchy.forecast).to eq({:temperature=>75.07, :summary=>"overcast clouds"})
-    expect(munchy.travel_time).to eq("00:35:46")
+    expect(munchy.travel_time).to eq('00 hours, 35 minutes')
     expect(munchy.destination_city).to eq('harlingen,tx')
   end
 end
