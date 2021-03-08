@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'restaurant recommendation' do
+describe 'restaurant recommendation', :vcr do
   it 'provides the necessary information' do
     get '/api/v1/munchies?start=denver,co&destination=pueblo,co&food=hamburger'
 
@@ -11,7 +11,7 @@ describe 'restaurant recommendation' do
     expect(rec_info[:id]).to eq('null')
 
     expect(rec_info).to have_key(:type)
-    expect(rec_info[:type]).to eq('munchie')
+    expect(rec_info[:type]).to eq('munchies')
 
     expect(rec_info).to have_key(:attributes)
     expect(rec_info[:attributes]).to have_key(:destination_city)
