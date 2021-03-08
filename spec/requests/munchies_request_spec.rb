@@ -20,8 +20,8 @@ describe 'restaurant recommendation', :vcr do
     expect(rec_info[:attributes][:forecast]).to have_key(:summary)
     expect(rec_info[:attributes][:forecast]).to have_key(:temperature)
 
-    expect(rec_info).to have_key(:restaurant)
-    expect(rec_info[:restaurant]).to have_key(:name)
-    expect(rec_info[:restaurant]).to have_key(:address)
+    expect(rec_info[:attributes]).to have_key(:restaurant)
+    expect(rec_info[:attributes][:restaurant]).to have_key(:name)
+    expect(rec_info[:attributes][:restaurant]).to have_key(:address)
   end
 end
