@@ -18,14 +18,14 @@ describe MapService do
       expect(latlon[:lng]).to be_a(Float)
     end
 
-    it 'returns only time', :vcr do
+    it 'returns directions', :vcr do
       enpoint = '/directions/v2/route?'
       params = { from: 'mcallen,tx', to: 'harlingen,tx' }
 
       time = MapService.call_directions_db(enpoint, params)
 
-      expect(time).to be_a(String)
-      expect(time).to eq("00:35:46")
+      expect(time).to be_a(Hash)
+      expect(time).to have_key(:route)
     end
   end
 end

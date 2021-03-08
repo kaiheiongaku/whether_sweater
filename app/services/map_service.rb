@@ -13,7 +13,7 @@ class MapService
         request.params = params
         request.params[:key] = ENV['Map_api_key']
       end
-      JSON.parse(response.body, symbolize_names: true)[:route][:formattedTime]
+      JSON.parse(response.body, symbolize_names: true)
     end
 
     private
