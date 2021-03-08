@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe 'request weather forecast information' do
-  it 'returns weather hash' do
+describe 'request weather forecast information', :vcr do
+  it 'returns weather hash'do
     get '/api/v1/forecast?location=mcallen,tx'
 
     expect(response).to be_successful
 
-    weather_json = JSON.parse(response.body, symbolize_names: true)
+    weather_json = JSON.parse(response.body, symbolize_names: true)[:data]
 
     expect(weather_json).to be_a(Hash)
 
@@ -27,17 +27,17 @@ describe 'request weather forecast information' do
 
     expect(response).to be_successful
 
-    current_weather = JSON.parse(response.body, symbolize_names: true)[:attributes][:current_weather]
+    current_weather = JSON.parse(response.body, symbolize_names: true)[:data][:attributes][:current_weather]
 
     expect(current_weather).to be_a(Hash)
 
     expect(current_weather).to have_key(:datetime)
     #verify date formats for these
     expect(current_weather).to have_key(:sunrise)
-    expect(current_weatherset).to have_key(:sunset)
+    expect(current_weather).to have_key(:sunset)
 
     expect(current_weather).to have_key(:temperature)
-    expect(current_weather[:temperature]).to be_a(Float)
+    expect(current_weather[:temperature]).to be_a(Float).or(be_an(Integer))
     #need something to verify farenheight
 
     expect(current_weather).to have_key(:feels_like)
@@ -47,13 +47,13 @@ describe 'request weather forecast information' do
     #expect(current_weather_a(Number)
 
     expect(current_weather).to have_key(:uvi)
-    #expect(current_weathermber)
+    expect(current_weather[:uvi]).to be_a(Float).or(be_an(Integer))
 
     expect(current_weather).to have_key(:visibility)
-    #expect(current_weatherbe_a(Number)
+    expect(current_weather[:visibility]).to be_a(Float).or(be_an(Integer))
 
-    expect(current_weather).to have_key(:description)
-    expect(current_weather[:visibility]).to be_a(String)
+    expect(current_weather).to have_key(:conditions)
+    expect(current_weather[:conditions]).to be_a(String)
 
     expect(current_weather).to have_key(:icon)
     expect(current_weather[:icon]).to be_a(String)
@@ -65,7 +65,7 @@ describe 'request weather forecast information' do
 
     expect(response).to be_successful
 
-    daily_weather = JSON.parse(response.body, symbolize_names: true)[:attributes][:daily_weather]
+    daily_weather = JSON.parse(response.body, symbolize_names: true)[:data][:attributes][:daily_weather]
 
     expect(daily_weather).to be_an(Array)
     expect(daily_weather.count).to eq(5)
@@ -79,10 +79,10 @@ describe 'request weather forecast information' do
     #verify datetime format
 
     expect(daily_weather.first).to have_key(:max_temp)
-    expect(daily_weather.first[:max_temp]).to be_a(Float)
+    expect(daily_weather.first[:max_temp]).to be_a(Float).or(be_an(Integer))
     #also verify Farenheight
     expect(daily_weather.first).to have_key(:min_temp)
-    expect(daily_weather.first[:min_temp]).to be_a(Float)
+    expect(daily_weather.first[:min_temp]).to be_a(Float).or(be_an(Integer))
     #also verify Farenheight
 
     expect(daily_weather.first).to have_key(:conditions)
@@ -98,7 +98,7 @@ describe 'request weather forecast information' do
 
     expect(response).to be_successful
 
-    hourly_weather = JSON.parse(response.body, symbolize_names: true)[:attributes][:hourly_weather]
+    hourly_weather = JSON.parse(response.body, symbolize_names: true)[:data][:attributes][:hourly_weather]
 
     expect(hourly_weather).to be_an(Array)
     expect(hourly_weather.count).to eq(8)
@@ -107,8 +107,8 @@ describe 'request weather forecast information' do
     expect(hourly_weather.first).to have_key(:time)
     #verify time format
 
-    expect(hourly_weather.first).to have_key(:temp)
-    expect(hourly_weather.first[:temp]).to be_a(Float)
+    expect(hourly_weather.first).to have_key(:temperature)
+    expect(hourly_weather.first[:temperature]).to be_a(Float).or(be_an(Integer))
     #verify farenheight
 
     expect(hourly_weather.first).to have_key(:conditions)
