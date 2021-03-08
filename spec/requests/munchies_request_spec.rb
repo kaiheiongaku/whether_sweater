@@ -11,7 +11,7 @@ describe 'restaurant recommendation', :vcr do
     expect(rec_info[:id]).to eq('null')
 
     expect(rec_info).to have_key(:type)
-    expect(rec_info[:type]).to eq('munchies')
+    expect(rec_info[:type]).to eq('munchy')
 
     expect(rec_info).to have_key(:attributes)
     expect(rec_info[:attributes]).to have_key(:destination_city)
