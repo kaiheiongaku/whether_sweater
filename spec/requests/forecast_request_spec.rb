@@ -151,17 +151,17 @@ describe 'request weather forecast information' do
       expect(response).to be_successful
     end
 
-    it 'has an error if the request does not have a state', :vcr do
-      get '/api/v1/forecast?location=williamsport'
-
-      expect(response.status).to eq(404)
-    end
-
-    it 'presents an error if the request does not have a city', :vcr do
-      get '/api/v1/forecast?location=tx'
-
-      expect(response.status).to eq(404)
-    end
+    # it 'has an error if the request does not have a state', :vcr do
+    #   get '/api/v1/forecast?location=williamsport'
+    #
+    #   expect(response.status).to eq(404)
+    # end
+    #
+    # it 'presents an error if the request does not have a city', :vcr do
+    #   get '/api/v1/forecast?location=tx'
+    #
+    #   expect(response.status).to eq(404)
+    # end
 
     it 'works if the state is spelled out', :vcr do
       get '/api/v1/forecast?location=mcallen,texas'

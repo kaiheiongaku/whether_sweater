@@ -46,7 +46,7 @@ describe HourlyWeather do
                         ]
                 }
     hourly = HourlyWeather.new(hourly_weather_info)
-    expect(hourly.time).to eq('1600')
+    expect(hourly.time.size).to eq('1600')
     expect(hourly.temperature).to eq(69.6)
     expect(hourly.conditions).to eq('overcast clouds')
     expect(hourly.icon).to eq('04d')
