@@ -5,10 +5,10 @@ describe 'users requests' do
     describe 'happy path' do
       it 'creates a user' do
         headers = { 'ACCEPT' => 'application/json' }
-        params = {
+        params = { "user": {
                   "email": "whatever@example.com",
                   "password": "password",
-                  "password_confirmation": "password"
+                  "password_confirmation": "password"}
                 }
         post '/api/v1/users', params: params, headers: headers
 
