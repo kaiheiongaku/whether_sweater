@@ -11,6 +11,5 @@ class User < ApplicationRecord
     end
   end
 
-
   has_secure_password
 end

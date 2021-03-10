@@ -15,21 +15,11 @@ describe 'users requests' do
         expect(response.content_type).to eq('application/json')
         expect(response.status).to eq(201)
 
-        # body = {
-        #         "data": {
-        #           "type": "users",
-        #           "id": "1",
-        #           "attributes": {
-        #             "email": "whatever@example.com",
-        #             "api_key": "jgn983hy48thw9begh98h4539h4"
-        #           }
-        #         }
-        #       }
-        expect(response.body).to be_a(Hash)
-        expect(response.body).to have_key('data')
-        expect(response.body.keys).to eq('type', 'id', 'attributes')
-        expect(response.body[:data][:attributes].keys).to eq(['email', 'api_key'])
-
+        parsed = JSON.parse(response.body, symbolize_names: true)
+        expect(parsed).to be_a(Hash)
+        expect(parsed).to have_key(:data)
+        expect(parsed[:data].keys).to eq([:id, :type, :attributes])
+        expect(parsed[:data][:attributes].keys).to eq([:email, :api_key])
       end
     end
   end
