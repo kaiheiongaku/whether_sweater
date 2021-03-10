@@ -1,15 +1,15 @@
 class Api::V1::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
-    if @user.save
+    if @user.save && params[:user][:password_confirmation]
       render json: UsersSerializer.new(@user), status: 201
     else
-      render json: { error: 'I hate to be a confuser, but we couldn\'t create that user.'}, status: 400
+      render json: { errors: @user.errors.full_messages }, status: 400
     end
   end
 
   private
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 end
