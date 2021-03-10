@@ -8,6 +8,11 @@ describe MapFacade do
       expect(latlon).to eq({ lat: 26.196695,
                              lng: -98.235698 })
     end
+
+    it 'can get travel time', :vcr do
+      time = MapFacade.retrieve_travel_time('mcallen, tx', 'harlingen, tx')
+      expect(time).to eq('00:35:46')
+    end
   end
 
   describe 'sad path' do
