@@ -11,5 +11,9 @@ class User < ApplicationRecord
     end
   end
 
+  def verify_api_key(key)
+    self.api_key == key
+  end
+
   has_secure_password
 end
