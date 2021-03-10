@@ -9,7 +9,11 @@ class RoadTrip
   end
 
   def convert_time(time)
-    "#{time[0..1]} hours, #{time[2..3]} minutes"
+    if time
+      "#{time[0..1]} hours, #{time[2..3]} minutes"
+    else
+      "impossible route"
+    end
   end
 
   def weather(hourly_weathers)
@@ -21,6 +25,10 @@ class RoadTrip
   end
 
   def rounded_hours_until_arrival
-    (@travel_time[0..1].to_i * 60 + @travel_time[10..11].to_i) / 60
+    if @travel_time == 'impossible route'
+      0
+    else
+      (@travel_time[0..1].to_i * 60 + @travel_time[10..11].to_i) / 60
+    end
   end
 end
