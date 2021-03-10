@@ -25,5 +25,51 @@ describe 'road trip requests' do
         expect(road_trip[:data][:attributes][:weather_at_eta][:temperature]).to be_a(Float)
       end
     end
+
+    describe 'sad path' do
+      it 'returns an error if api key is incorrect' do
+        user = User.create!(email: 'me@me.com', password: 'Turingrocks')
+        headers = { 'ACCEPT' => 'application/json' }
+        params = { 'road_trip': { 'origin': "mcallen,tx",
+                   'destination': "harlingen,tx",
+                   'api_key': "#{123}" } }
+
+        post '/api/v1/road_trip', params: params, headers: headers
+
+        expect(response.status).to eq(401)
+
+        error = JSON.parse(response.body, symbolize_names: true)[:error]
+        expect(error).to eq('Something went awry.')
+      end
+
+      it 'returns an error if there is no origin', :vcr do
+        user = User.create!(email: 'me@me.com', password: 'Turingrocks')
+        headers = { 'ACCEPT' => 'application/json' }
+        params = { 'road_trip': {
+                   'destination': "harlingen,tx",
+                   'api_key': "#{user.api_key}" } }
+
+        post '/api/v1/road_trip', params: params, headers: headers
+
+        expect(response.status).to eq(401)
+
+        error = JSON.parse(response.body, symbolize_names: true)[:error]
+        expect(error).to eq('Something went awry.')
+      end
+
+      it 'returns an error if there is no destination' do
+        user = User.create!(email: 'me@me.com', password: 'Turingrocks')
+        headers = { 'ACCEPT' => 'application/json' }
+        params = { 'road_trip': { 'origin': "mcallen,tx",
+                   'api_key': "#{user.id}" } }
+
+        post '/api/v1/road_trip', params: params, headers: headers
+
+        expect(response.status).to eq(401)
+
+        error = JSON.parse(response.body, symbolize_names: true)[:error]
+        expect(error).to eq('Something went awry.')
+      end
+    end
   end
 end
