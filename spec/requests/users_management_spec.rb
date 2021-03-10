@@ -20,7 +20,11 @@ describe 'users requests' do
         expect(parsed).to have_key(:data)
         expect(parsed[:data].keys).to eq([:id, :type, :attributes])
         expect(parsed[:data][:attributes].keys).to eq([:email, :api_key])
+
+        expect(User.last.email).to eq('whatever@example.com')
+        expect(User.last.api_key.size).to eq(22)
       end
     end
+
   end
 end
