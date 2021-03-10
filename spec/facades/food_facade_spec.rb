@@ -6,7 +6,7 @@ describe FoodFacade do
     restaurant = FoodFacade.pull_restaurant('harlingen,tx', 'burger')
 
     expect(restaurant).to be_a(Restaurant)
-    expect(restaurant.name).to eq("Frankie Flav’s Craft Burger House")
-    expect(restaurant.address).to eq("711 N 77 Sunshine Strip Harlingen, TX 78550")
+    expect(restaurant.name).to be_a(String)
+    expect(restaurant.address).to be_a(String)
   end
 end

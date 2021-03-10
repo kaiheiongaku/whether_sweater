@@ -10,7 +10,7 @@ describe RoadTripService do
 
   it 'returns the weather forecast for destination', :vcr do
     latlon = {:lat=>34.052238, :lng=>-118.243344}
-    weather = RoadTripService.hourly_weather_at_eta(latlon)
+    weather = RoadTripService.hourly_weather_at_end(latlon)
 
     expect(weather).to be_an(Array)
     expect(weather.size).to eq(48)
