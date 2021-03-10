@@ -6,5 +6,11 @@ class WeatherFacade
                lon: lat_and_lon[:lng] }
     WeatherService.call_weather_db(endpoint, params)
     end
+
+    def create_hourly_weather(weathers)
+      weathers.map do |weather|
+        HourlyWeather.new(weather)
+      end
+    end
   end
 end
