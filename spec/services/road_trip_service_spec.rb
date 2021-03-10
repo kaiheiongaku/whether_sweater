@@ -20,6 +20,6 @@ describe RoadTripService do
     info = RoadTripService.road_trip_info('new york, ny', 'los angeles, ca')
 
     expect(info).to be_a(Hash)
-    expect(info.keys).to eq([:travel_time, :hourly_weather])
+    expect(info.keys).to eq([:travel_time, :hourly_weather_at_eta])
   end
 end
