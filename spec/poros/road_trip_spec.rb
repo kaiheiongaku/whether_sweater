@@ -10,7 +10,7 @@ describe RoadTrip do
     expect(roadtrip).to be_a(RoadTrip)
     expect(roadtrip.start_city).to eq('new york, ny')
     expect(roadtrip.end_city).to eq('los angeles, ca')
-    expect(roadtrip.travel_time).to eq('40 hours, 34 minutes')
+    expect(roadtrip.travel_time).to be_a(String)
 
     expect(roadtrip.weather_at_eta).to be_a(Hash)
     expect(roadtrip.weather_at_eta[:temperature]).to eq(51.96)

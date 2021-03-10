@@ -10,7 +10,7 @@ class RoadTrip
 
   def convert_time(time)
     if time
-      "#{time[0..1]} hours, #{time[2..3]} minutes"
+      "#{time[0..1]} hours, #{time[3..4]} minutes"
     else
       "impossible route"
     end
