@@ -15,4 +15,11 @@ describe RoadTripService do
     expect(weather).to be_an(Array)
     expect(weather.size).to eq(48)
   end
+
+  it 'returns all info', :vcr do
+    info = RoadTripService.road_trip_info('new york, ny', 'los angeles, ca')
+
+    expect(info).to be_a(Hash)
+    expect(info.keys).to eq([:travel_time, :hourly_weather])
+  end
 end
