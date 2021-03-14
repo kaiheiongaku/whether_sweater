@@ -15,4 +15,21 @@ describe User do
       expect(user.api_key.size).to eq(22)
     end
   end
+  describe 'instance methods' do
+    describe 'api_key verfication' do
+      it 'verifies with valid key' do
+        user = User.create(email: 'codingMaster@turing.io', password: 'T1m!s@w3s0me')
+
+        answer = user.verify_api_key(user.api_key)
+        expect(answer).to eq(true)
+      end
+      it 'returns false if not valid key' do
+        user = User.create(email: 'codingMaster@turing.io', password: 'T1m!s@w3s0me')
+
+        answer = user.verify_api_key('123')
+
+        expect(answer).to eq(false)
+      end
+    end
+  end
 end

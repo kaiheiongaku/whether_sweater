@@ -8,7 +8,7 @@ describe 'sessions request' do
         headers = { 'ACCEPT' => 'application/json' }
         params = { "user": {
                   "email": "whatever@example.com",
-                  "password": "password",
+                  "password": "password"
                            }
                 }
         post '/api/v1/sessions', params: params, headers: headers

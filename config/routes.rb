@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :backgrounds, only: :index
       resources :users, only: :create
       resources :sessions, only: :create
+      resources :road_trip, only: :create
     end
   end
   # match '*unmatched_route', :to => 'application#raise_not_found!', :via => :all
