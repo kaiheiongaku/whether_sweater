@@ -8,7 +8,8 @@ script:
 - bundle exec rspec
 deploy:
   provider: heroku
-  api_key: ENV['Heroku_key']
+  api_key:
+    secure: ENV['Heroku_key']
   app: whether-sweater-23110
   run: rails db:migrate
   on:
