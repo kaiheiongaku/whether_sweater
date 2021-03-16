@@ -16,7 +16,6 @@ describe WeatherService do
       expect(weather_data).to have_key(:hourly)
 
       expect(weather_data).to_not have_key(:minutely)
-      expect(weather_data).to_not have_key(:alerts)
     end
 
     it 'has current_weather', :vcr do

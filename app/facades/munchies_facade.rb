@@ -5,5 +5,4 @@ class MunchiesFacade
       Munchy.new(response, destination)
     end
   end
-
 end
