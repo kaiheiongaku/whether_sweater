@@ -9,7 +9,7 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: ENV['Heroku_key']
+    secure: AwyFsGCGLKQ7ZgaiY9XeBL9x7cqETBhHLAo8zPz+agueY/W5CiDzVr/lD2j1L+tFp2IYSx5AVMWt27CYuW5DuWfHBEisS1H38ITyeZGnCc0wfUSPLNlQs9AN9g4IjayqfEC4e2DPKxPuR9CdlIyVe+mXwo6Whv7EdU/rPHlSFFjA9YT31I5kMmc8fNYi5fjaGhXvTO+UbBByr3yy38UTh+mZZQgVwx7JrcbuDt04tyoIOv/WppaDz3egI5l3RudHlJEgG7wWQn3uITGKfOmlgwlleok0X5xaVhuIXGADumfyRaa1rjMZRSveYwDx9yA0XHZmLa8dSSY8YSIpHRlcatCzej7Urkub9xU+kuXsZH/4UreXcCGbi0rWwcWI9XnBYhHlnLUi+9doNoMyicU9KMuMQPP+FhqZ3uDMqJiF1P5Xm0Xk5/yXYcEZFr/YYxY4f3isxzjOeuGx0nn9g/PX/DZ31p9p1oCuvS478/ZVvw/aeK50FHFUIi00r8SJA3MHREdyXpHG7I+zkIyNi39PPiCsDUKhS2hHikVaISdosmY/c0ILkEZLnrM7Kd0YEQ1dSXjvGQy4USbmXWMX2Uw4AS21kW/xBe/f1FkbTRRMIMhn3k0IAytNqcdvtP+eEwcQJj/eg1bl6ONaLhg5M0IyY1HjUkKU0ldPBxupCrDGCqc=
   app: whether-sweater-23110
   run: rails db:migrate
   on:
